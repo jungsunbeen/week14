@@ -23,34 +23,34 @@ export const login = async(id,pw) => {
 };
 
 export const getMyPage = async() => {
-    const authAxios = getAuthAxios(localStorage.getItem("access"));
-    const result = authAxios.get("/mypage");
-    return result.data;
+    // const authAxios = getAuthAxios(localStorage.getItem("access"));
+    // const result = authAxios.get("/mypage");
+    // return result.data;
     
-    // try{
-    //     const access = localStorage.getItem("access");
-    //     const result = await axios.get(`${baseURL}/mypage`,{
-    //         headers: {
-    //             Authorization: `Bearer ${access}`
-    //         },
-    //     });
-    //     return result.data;
-    // }catch(error){
-    //     if (error.response.status === 401){
-    //         const response = await getNewRefreshToken();
-    //         localStorage.setItem("access",response.accessToken);
-    //         localStorage.setItem("refresh",response.refreshToken);
+    try{
+        const access = localStorage.getItem("access");
+        const result = await axios.get(`${baseURL}/mypage`,{
+            headers: {
+                Authorization: `Bearer ${access}`
+            },
+        });
+        return result.data;
+    }catch(error){
+        if (error.response.status === 401){
+            const response = await getNewRefreshToken();
+            localStorage.setItem("access",response.accessToken);
+            localStorage.setItem("refresh",response.refreshToken);
             
-    //         const newResult = await axios.get(`${baseURL}/mypage`,{
-    //             headers: {
-    //                 Authorization: `Bearer ${response.accessToken}`,
-    //             },
-    //         });
-    //         return newResult.data;
-    //     }else{
-    //         console.log(error);
-    //     }
-    // }
+            const newResult = await axios.get(`${baseURL}/mypage`,{
+                headers: {
+                    Authorization: `Bearer ${response.accessToken}`,
+                },
+            });
+            return newResult.data;
+        }else{
+            console.log(error);
+        }
+    }
 };
 
 export const getNewRefreshToken = async () => {

@@ -25,13 +25,13 @@ const Mypage = () => {
     },[]);
 
     if(loading) return <div>loading...</div>;
-    
+
   return (
     <Wrapper>
         <Title>회원 정보</Title>
         <div>회원 이름 : {data.name} </div>
         <div>회원 나이 : {data.age} </div>
-        <button onClick={handleLogout}>로그인</button>
+        <Button onClick={handleLogout}>로그아웃</Button>
     </Wrapper>
   )
 }
@@ -65,3 +65,24 @@ const Title = styled.div`
   line-height: normal;
 `;
 
+const Button = styled.button`
+  font-size : 13px;
+  font-weight: 800;
+  margin-top: 1rem;
+  background-color: #89cdf6;
+  color: white;
+  padding: 19px;
+  border-radius: 10px;
+  border: none;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 84px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 3px 3px skyblue;
+    color: black;
+    background-color: white;
+  } 
+`;
