@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getAuthAxios } from "./authAxios";
 
 const baseURL = `http://yangzzago.kro.kr:3000`;
 
@@ -40,7 +39,7 @@ export const getMyPage = async() => {
             const response = await getNewRefreshToken();
             localStorage.setItem("access",response.accessToken);
             localStorage.setItem("refresh",response.refreshToken);
-            
+            //navigate 여기서 하고 싶은데 안 됨 ...
             const newResult = await axios.get(`${baseURL}/mypage`,{
                 headers: {
                     Authorization: `Bearer ${response.accessToken}`,
