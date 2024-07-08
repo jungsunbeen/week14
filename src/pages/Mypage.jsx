@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { getMyPage } from '../apis/user';
+import { useNavigate } from 'react-router-dom';
 
 const Mypage = () => {
-    const [data,setData] = useState();
+    const [data,setData] = useState(null);
     const [loading,setLoading] = useState(true);
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
+      navigate('/');
+    }
 
     useEffect(() => {
         getMyPage()
@@ -23,6 +31,7 @@ const Mypage = () => {
         <Title>회원 정보</Title>
         <div>회원 이름 : {data.name} </div>
         <div>회원 나이 : {data.age} </div>
+        <button onClick={handleLogout}>로그인</button>
     </Wrapper>
   )
 }

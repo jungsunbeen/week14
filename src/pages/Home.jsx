@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
 import { login } from '../apis/user';
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    useEffect(()=> {
+      const token = localStorage.getItem('access');
+      if(token){
+        navigate('/mypage');
+      }
+    },[navigate]);
+
     const [id,onChangeId] = useForm();
     const [pw,onChangePw] = useForm();
 
